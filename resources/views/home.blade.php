@@ -50,6 +50,11 @@
     </table>
 
 
+    <div>
+        <label for="">Name</label>
+        <input type="text" value={{$user['name']}}>
+    </div>
+
     <script>
         let btnElem = document.getElementById('one');
         btnElem.addEventListener('click', function() {
