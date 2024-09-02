@@ -8,9 +8,17 @@ use App\Models\User;
 
 class WebsiteController extends Controller
 {
+
+    public function webIndexPage()
+    {
+        return view('web.index');
+    }
+
+    public function webMasterPage(){
+        return view('web.webmaster');
+    }
     function home()
     {
-
         // Extract user info from database
         $user = User::all()->first();
 
@@ -31,13 +39,13 @@ class WebsiteController extends Controller
         return view('home', [
             'fruits' => $fruits,
             'personDetails' => $person,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
-    function shop()
+    function shopPage()
     {
-        return "shop page";
+        return view('web.shop');
     }
 
     function singleProduct()
@@ -54,4 +62,8 @@ class WebsiteController extends Controller
     }
 
 
+    public function adminIndexPage()
+    {
+        return view('admin.adminindex');
+    }
 }
