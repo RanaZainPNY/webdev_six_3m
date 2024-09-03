@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 use App\Models\User;
 
@@ -11,10 +12,14 @@ class WebsiteController extends Controller
 
     public function webIndexPage()
     {
+
+
         return view('web.index');
+
     }
 
-    public function webMasterPage(){
+    public function webMasterPage()
+    {
         return view('web.webmaster');
     }
     function home()
@@ -45,7 +50,10 @@ class WebsiteController extends Controller
 
     function shopPage()
     {
-        return view('web.shop');
+        $products = Product::all();
+        return view('web.shop', [
+            'products' => $products
+        ]);
     }
 
     function singleProduct()
@@ -64,6 +72,15 @@ class WebsiteController extends Controller
 
     public function adminIndexPage()
     {
-        return view('admin.adminindex');
+        // fetching data from database
+        $products = Product::all();
+
+        return view('admin.adminindex', [
+            'products' => $products
+        ]);
+    }
+    public function adminMasterPage()
+    {
+        return view('admin.adminmaster');
     }
 }
