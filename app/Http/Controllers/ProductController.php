@@ -98,5 +98,69 @@ class ProductController extends Controller
         return view('admin.edit_prod_form', ['product' => $product]);
     }
 
+    function addToCart(string $id)
+    {
+        // dd($id);
+        // Session Based Cart
+
+        // Cart Structure
+        // $cart = [
+        //     '18' => [
+        //         'name' => 'abc',
+        //         'price' => 239,
+        //         'sku' => '3939UU',
+        //         'description' => "lorem ipsum",
+        //         'image' => '399303393.jpg',
+        //     ],
+        //     '21' => [
+
+        //     ],
+
+        // ];
+
+        // $cart['18']['name']
+        // $cart['21']['description']
+
+        // dd($cart);
+
+        // extracting product from db
+        $product = Product::findOrFail($id);
+
+        $cart = session()->get('cart');
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            // when product will be added first time in the cart
+            $cart[$id] = [
+                "name" => $product->name,
+                "sku" => $product->sku,
+                "price" => $product->price,
+                "description" => $product->description,
+                "image" => $product->image,
+                "quantity" => 1
+            ];
+        }
+
+        session()->put('cart', $cart);
+        return redirect()->back();
+    }
+
+    function getCart()
+    {
+        $cart = session()->get('cart');
+        dd($cart);
+    }
+
+    function removeFromCart($id)
+    {
+        // dd($id);
+        $cart = session()->get('cart');
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+        return redirect()->route('web-shop');
+    }
 
 }

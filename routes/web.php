@@ -29,10 +29,19 @@ Route::get('/', function () {
 Route::get('/web/index', [WebsiteController::class, 'webIndexPage'])->name('web-index');
 Route::get('/web/master', [WebsiteController::class, 'webMasterPage'])->name('web-master');
 Route::get('/web/shop', [WebsiteController::class, 'shopPage'])->name('web-shop');
+
+Route::get('/web/addtocart/{id}', [ProductController::class, 'addToCart'])->name('web-add-to-cart');
+Route::get('/web/removefromcart/{id}', [ProductController::class, 'removeFromCart'])->name('web-remove-from-cart');
+Route::get('/web/getcart', [ProductController::class, 'getCart'])->name('web-get-cart');
+
+Route::get('/web/checkout', [WebsiteController::class, 'webCheckoutPage'])->name('web-checkout');
+
 // Route::get('/home', [WebsiteController::class, 'home'])->name('web-home');
 // Route::get('/singleproduct', [WebsiteController::class, 'singleProduct'])->name('web-single-product');
 // Route::get('/checkout', [WebsiteController::class, 'checkout'])->name('web-checkout');
 // Route::get('/cart', [WebsiteController::class, 'cart'])->name('web-cart');
+
+
 
 // Route::get('/home33', function () {
 //     // return "<h1> Hello HTML </h1><script>alert('hello js')</script>";

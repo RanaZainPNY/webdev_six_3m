@@ -192,7 +192,7 @@
                                                 <a href="#" class="favme fa fa-heart"></a>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Product Description -->
                                         <div class="product-description">
                                             {{-- <span>topshop</span> --}}
@@ -204,13 +204,14 @@
                                             </a>
                                             <p class="product-price">
                                                 {{-- <span class="old-price">$75.00</span> --}}
-                                               Price: {{ $product->price }}</p>
+                                                Price: {{ $product->price }}</p>
 
                                             <!-- Hover Content -->
                                             <div class="hover-content">
                                                 <!-- Add to Cart -->
                                                 <div class="add-to-cart-btn">
-                                                    <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    <a href="{{ route('web-add-to-cart', $product->id) }}"
+                                                        class="btn essence-btn">Add to Cart</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,7 +225,7 @@
                         </div>
                     </div>
                     <!-- Pagination -->
-                    <nav aria-label="navigation">
+                    {{-- <nav aria-label="navigation">
                         <ul class="pagination mt-50 mb-70">
                             <li class="page-item"><a class="page-link" href="#"><i
                                         class="fa fa-angle-left"></i></a></li>
@@ -236,7 +237,7 @@
                             <li class="page-item"><a class="page-link" href="#"><i
                                         class="fa fa-angle-right"></i></a></li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                 </div>
             </div>
         </div>

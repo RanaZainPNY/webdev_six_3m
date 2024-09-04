@@ -64,7 +64,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="cta-content bg-img background-overlay" style="background-image: url(img/bg-img/bg-5.jpg);">
+                    <div class="cta-content bg-img background-overlay" style="background-image: url({{asset('essencemaster/img/bg-img/bg-5.jpg')}});">
                         <div class="h-100 d-flex align-items-center justify-content-end">
                             <div class="cta--text">
                                 <h6>-60%</h6>
@@ -118,12 +118,12 @@
                                 <p class="product-price">$80.00</p>
 
                                 <!-- Hover Content -->
-                                <div class="hover-content">
+                                {{-- <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -149,12 +149,12 @@
                                 <p class="product-price">$80.00</p>
 
                                 <!-- Hover Content -->
-                                <div class="hover-content">
+                                {{-- <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -186,12 +186,12 @@
                                 <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
 
                                 <!-- Hover Content -->
-                                <div class="hover-content">
+                                {{-- <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -222,12 +222,12 @@
                                 <p class="product-price">$80.00</p>
 
                                 <!-- Hover Content -->
-                                <div class="hover-content">
+                                {{-- <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
                                         <a href="#" class="btn essence-btn">Add to Cart</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
     <!-- ##### New Arrivals Area End ##### -->
 
     <!-- ##### Brands Area Start ##### -->
-    <div class="brands-area d-flex align-items-center justify-content-between">
+    {{-- <div class="brands-area d-flex align-items-center justify-content-between">
         <!-- Brand Logo -->
         <div class="single-brands-logo">
             <img src="img/core-img/brand1.png" alt="">
@@ -263,6 +263,6 @@
         <div class="single-brands-logo">
             <img src="img/core-img/brand6.png" alt="">
         </div>
-    </div>
+    </div> --}}
     <!-- ##### Brands Area End ##### -->
 @endsection

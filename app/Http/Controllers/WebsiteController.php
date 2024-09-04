@@ -83,4 +83,8 @@ class WebsiteController extends Controller
     {
         return view('admin.adminmaster');
     }
+    public function webCheckoutPage()
+    {
+        return view('web.checkout');
+    }
 }

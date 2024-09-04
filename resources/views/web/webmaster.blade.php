@@ -10,7 +10,6 @@
 
     <!-- Title  -->
     <title>Essence - Fashion Ecommerce Template</title>
-
     <!-- Favicon  -->
     <link rel="icon" href="{{ asset('essencemaster/img/core-img/favicon.ico') }}">
 
@@ -42,7 +41,7 @@
                     <!-- Nav Start -->
                     <div class="classynav">
                         <ul>
-                            <li><a href="#">Shop</a>
+                            {{-- <li><a href="#">Shop</a>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">Women's Collection</li>
@@ -72,8 +71,10 @@
                                         <img src="{{ asset('essencemaster/img/bg-img/bg-6.jpg') }}" alt="">
                                     </div>
                                 </div>
-                            </li>
-                            <li><a href="#">Pages</a>
+                            </li> --}}
+
+                            <li><a href="{{route('web-index')}}">Home</a></li>
+                            {{-- <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="shop.html">Shop</a></li>
@@ -84,8 +85,10 @@
                                     <li><a href="regular-page.html">Regular Page</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="blog.html">Blog</a></li>
+                            </li> --}}
+                            <li><a href="">Blog</a></li>
+                            <li><a href="{{route('web-shop')}}">Shop</a></li>
+                            <li><a href="{{route('web-checkout')}}">Checkout</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
@@ -114,7 +117,10 @@
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="{{ asset('essencemaster/img/core-img/bag.svg') }}"
                             alt="">
-                        <span>3</span></a>
+                        <span>@php
+                            $val = count(session('cart'));
+                            echo "$val";
+                        @endphp</span></a>
                 </div>
             </div>
 
@@ -130,31 +136,49 @@
         <!-- Cart Button -->
         <div class="cart-button">
             <a href="#" id="rightSideCart"><img src="{{ asset('essencemaster/img/core-img/bag.svg') }}"
-                    alt=""> <span>3</span></a>
+                    alt=""> <span>@php
+                        $val = count(session('cart'));
+                        echo "$val";
+                    @endphp</span></a>
         </div>
 
         <div class="cart-content d-flex">
 
             <!-- Cart List Area -->
             <div class="cart-list">
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="{{ asset('essencemaster/img/product-img/product-1.jpg') }}" class="cart-thumb"
-                            alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">Mango</span>
-                            <h6>Button Through Strap Mini Dress</h6>
-                            <p class="size">Size: S</p>
-                            <p class="color">Color: Red</p>
-                            <p class="price">$45.00</p>
-                        </div>
-                    </a>
-                </div>
 
-                <!-- Single Cart Item -->
+                @foreach ((array) session('cart') as $id => $details)
+                    <div class="single-cart-item">
+                        <a href="#" class="product-image">
+                            <img src="{{ asset('uploads/products/' . $details['image']) }}" class="cart-thumb"
+                                alt="">
+                            <!-- Cart Item Desc -->
+                            <div class="cart-item-desc">
+                                <span class="product-remove">
+                                    <form id="{{ 'remove-from-cart-' . $id }}"
+                                        action="{{ route('web-remove-from-cart', $id) }}" method='GET'>
+                                        @csrf
+                                        <input type="hidden" value="{{ $id }}">
+                                    </form>
+                                    <i onclick="submitform({{ $id }})" class="fa fa-close"
+                                        aria-hidden="true"></i>
+                                    {{-- <a href="{{ route('web-remove-from-cart', $id) }}">
+                                    </a> --}}
+                                </span>
+                                {{-- <span class="badge">Mango</span> --}}
+                                {{-- <h6>Button Through Strap Mini Dress</h6> --}}
+                                <h5>{{ $details['name'] }}</h5>
+
+                                <p class="size">Quantity: {{ $details['quantity'] }}</p>
+                                {{-- <p class="color">Color: Red</p> --}}
+                                <p class="price">Price: {{ $details['price'] }}</p>
+
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+                <!--
+                {{-- <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
                         <img src="{{ asset('essencemaster/img/product-img/product-2.jpg') }}" class="cart-thumb"
@@ -186,18 +210,31 @@
                             <p class="price">$45.00</p>
                         </div>
                     </a>
-                </div>
+                </div> --}} -->
             </div>
 
-            <!-- Cart Summary -->
+            {{-- Cart Summary - --}}
             <div class="cart-amount-summary">
 
                 <h2>Summary</h2>
+
+                @php
+                    // Subtotal Calculations
+                    $subtotal = 0;
+                    $cart = session()->get('cart');
+                    foreach ($cart as $id => $details) {
+                        $subtotal += $details['quantity'] * $details['price'];
+                    }
+                    $discount = 15;
+                    $total = $subtotal * 0.85;
+                @endphp
+
                 <ul class="summary-table">
-                    <li><span>subtotal:</span> <span>$274.00</span></li>
+                    {{-- <li><span>subtotal:</span> <span>$274.00</span></li> --}}
+                    <li><span>subtotal:</span> <span>{{ $subtotal }}</span></li>
                     <li><span>delivery:</span> <span>Free</span></li>
                     <li><span>discount:</span> <span>-15%</span></li>
-                    <li><span>total:</span> <span>$232.00</span></li>
+                    <li><span>total:</span> <span>{{ $total }}</span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
                     <a href="checkout.html" class="btn essence-btn">check out</a>
@@ -468,9 +505,7 @@
     </div> --}}
     <!-- ##### Brands Area End ##### -->
 
-
     @yield('content')
-
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
@@ -543,20 +578,6 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-md-12 text-center">
-                    <p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | Made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>,
-                        distributed by <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
-            </div>
 
         </div>
     </footer>
@@ -575,6 +596,16 @@
     <!-- Active js -->
     <script src="{{ asset('essencemaster/js/active.js') }}"></script>
 
+
+    <script>
+        function submitform(id) {
+            // console.log(id)
+            let form = document.getElementById('remove-from-cart-' + id);
+            form.submit();
+
+            // console.log(form);
+        }
+    </script>
 </body>
 
 </html>
