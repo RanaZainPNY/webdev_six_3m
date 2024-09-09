@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use App\Models\Order;
 use App\Models\User;
 
 class WebsiteController extends Controller
@@ -26,12 +26,6 @@ class WebsiteController extends Controller
     {
         // Extract user info from database
         $user = User::all()->first();
-
-        // dump($user['id']);
-        // dump($user['name']);
-        // dump($user['email']);
-        // dump($user['password']);
-        // die();
 
         $person = [
             'name' => 'zain',
@@ -86,5 +80,55 @@ class WebsiteController extends Controller
     public function webCheckoutPage()
     {
         return view('web.checkout');
+    }
+
+    public function placeorder(Request $request)
+    {
+        // dd($request);
+        // DB::table('orders')]
+        $order = new Order();
+        $order->firstname = $request->firstname;
+        $order->lastname = $request->lastname;
+        $order->address = $request->contact;
+        $order->email = $request->email;
+        $order->contact = $request->contact;
+
+
+        $cart = session()->get('cart');
+        if ($cart) {
+            $total = 0;
+            foreach ($cart as $id => $details) {
+                $total += $details['quantity'] * $details['price'];
+            }
+
+            $order->total = $total;
+            $order->save();
+            // empty the cart
+            session()->forget('cart');
+            return redirect()->back();
+
+        } else {
+            echo "cart is empty";
+        }
+
+    }
+
+    function orders()
+    {
+        $orders = Order::all();
+        return view('admin.orders', [
+            'orders' => $orders
+        ]);
+    }
+
+    function deleteOrder($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return redirect()->back();
+    }
+
+    function blog(){
+        return view('web.blog');
     }
 }

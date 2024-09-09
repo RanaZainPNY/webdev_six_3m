@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\File;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
@@ -55,6 +56,10 @@ class ProductController extends Controller
         $product->sku = $request->sku;
         $product->price = $request->price;
         $product->description = $request->description;
+
+        $brand = Brand::all()->first();
+        $product->brand_id = $brand->id;
+
         // new record in data
         $product->save();
 

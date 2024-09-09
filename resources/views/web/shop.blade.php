@@ -200,7 +200,7 @@
                                             <span>{{ $product->sku }}</span>
                                             <a href="single-product-details.html">
                                                 {{-- <h6>Knot Front Mini Dress</h6> --}}
-                                                <h6>{{ $product->description }}</h6>
+                                                <h6>{{ $product->name }}</h6>
                                             </a>
                                             <p class="product-price">
                                                 {{-- <span class="old-price">$75.00</span> --}}

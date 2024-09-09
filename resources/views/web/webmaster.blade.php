@@ -73,7 +73,7 @@
                                 </div>
                             </li> --}}
 
-                            <li><a href="{{route('web-index')}}">Home</a></li>
+                            <li><a href="{{ route('web-index') }}">Home</a></li>
                             {{-- <li><a href="#">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="index.html">Home</a></li>
@@ -87,8 +87,8 @@
                                 </ul>
                             </li> --}}
                             <li><a href="">Blog</a></li>
-                            <li><a href="{{route('web-shop')}}">Shop</a></li>
-                            <li><a href="{{route('web-checkout')}}">Checkout</a></li>
+                            <li><a href="{{ route('web-shop') }}">Shop</a></li>
+                            <li><a href="{{ route('web-checkout') }}">Checkout</a></li>
                             <li><a href="contact.html">Contact</a></li>
                         </ul>
                     </div>
@@ -117,10 +117,17 @@
                 <div class="cart-area">
                     <a href="#" id="essenceCartBtn"><img src="{{ asset('essencemaster/img/core-img/bag.svg') }}"
                             alt="">
-                        <span>@php
-                            $val = count(session('cart'));
-                            echo "$val";
-                        @endphp</span></a>
+                        <span>
+                            @php
+                                $cart = session('cart');
+                                if ($cart) {
+                                    $val = count(session('cart'));
+                                    echo "$val";
+                                } else {
+                                    echo '0';
+                                }
+                            @endphp
+                        </span></a>
                 </div>
             </div>
 
@@ -136,10 +143,20 @@
         <!-- Cart Button -->
         <div class="cart-button">
             <a href="#" id="rightSideCart"><img src="{{ asset('essencemaster/img/core-img/bag.svg') }}"
-                    alt=""> <span>@php
-                        $val = count(session('cart'));
-                        echo "$val";
-                    @endphp</span></a>
+                    alt=""> <span>
+                    @php
+                        // $val = count(session('cart'));
+                        // echo "$val";
+                        $cart = session('cart');
+                        if ($cart) {
+                            $val = count(session('cart'));
+                            echo "$val";
+                        } else {
+                            echo '0';
+                        }
+
+                    @endphp
+                </span></a>
         </div>
 
         <div class="cart-content d-flex">
@@ -221,12 +238,15 @@
                 @php
                     // Subtotal Calculations
                     $subtotal = 0;
+                    $total = 0;
                     $cart = session()->get('cart');
-                    foreach ($cart as $id => $details) {
-                        $subtotal += $details['quantity'] * $details['price'];
+                    if ($cart) {
+                        foreach ($cart as $id => $details) {
+                            $subtotal += $details['quantity'] * $details['price'];
+                        }
+                        $discount = 15;
+                        $total = $subtotal * 0.85;
                     }
-                    $discount = 15;
-                    $total = $subtotal * 0.85;
                 @endphp
 
                 <ul class="summary-table">
@@ -237,7 +257,7 @@
                     <li><span>total:</span> <span>{{ $total }}</span></li>
                 </ul>
                 <div class="checkout-btn mt-100">
-                    <a href="checkout.html" class="btn essence-btn">check out</a>
+                    <a href="{{ route('web-checkout') }}" class="btn essence-btn">check out</a>
                 </div>
             </div>
         </div>
