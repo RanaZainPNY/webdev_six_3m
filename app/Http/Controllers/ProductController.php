@@ -19,6 +19,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->sku = $request->sku;
         $product->description = $request->description;
+        $product->brand_id = $request->brand_id;
         $product->save();
 
         if ($request->image != "") {
@@ -42,7 +43,13 @@ class ProductController extends Controller
 
     function create()
     {
-        return view('admin.create_prod_form');
+
+        $brands = Brand::all();
+        // dd($brands);
+
+        return view('admin.create_prod_form', [
+            'brands' => $brands
+        ]);
     }
     function store(Request $request)
     {
@@ -56,9 +63,7 @@ class ProductController extends Controller
         $product->sku = $request->sku;
         $product->price = $request->price;
         $product->description = $request->description;
-
-        $brand = Brand::all()->first();
-        $product->brand_id = $brand->id;
+        $product->brand_id = $request->brand_id;
 
         // new record in data
         $product->save();
@@ -100,7 +105,11 @@ class ProductController extends Controller
     {
         // dd($id);
         $product = Product::findOrFail($id);
-        return view('admin.edit_prod_form', ['product' => $product]);
+        $brands = Brand::all();
+        return view('admin.edit_prod_form', [
+            'product' => $product,
+            'brands' => $brands
+        ]);
     }
 
     function addToCart(string $id)

@@ -28,7 +28,9 @@ Route::get('/', function () {
 
 Route::get('/web/index', [WebsiteController::class, 'webIndexPage'])->name('web-index');
 Route::get('/web/master', [WebsiteController::class, 'webMasterPage'])->name('web-master');
-Route::get('/web/shop', [WebsiteController::class, 'shopPage'])->name('web-shop');
+Route::get('/web/shop/{brand_id?}', [WebsiteController::class, 'shopPage'])->name('web-shop');
+// /web/shop
+// /web/shop/3
 Route::get('/web/blog', [WebsiteController::class, 'blog'])->name('web-blog');
 
 Route::get('/web/addtocart/{id}', [ProductController::class, 'addToCart'])->name('web-add-to-cart');

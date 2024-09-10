@@ -16,6 +16,7 @@
                                     <tr class="border-2 border-bottom border-primary border-0">
                                         <th scope="col" class="text-center">Id</th>
                                         <th scope="col" class="text-center">Image</th>
+                                        <th scope="col" class="text-center">Brand</th>
                                         <th scope="col" class="text-center">Name</th>
                                         <th scope="col" class="text-center">SKU</th>
                                         <th scope="col" class="text-center">Price</th>
@@ -35,6 +36,7 @@
 
                                                 </div>
                                             </td>
+                                            <td>{{ $product->brand->name }}</td>
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->sku }}</td>
                                             <td>{{ $product->price }}</td>

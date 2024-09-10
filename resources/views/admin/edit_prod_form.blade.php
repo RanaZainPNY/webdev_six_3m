@@ -18,6 +18,16 @@
                                     id="name">
                             </div>
                             <div class="mb-3">
+                                <label for="brand" class="form-label">Brand</label>
+                                <select name="brand_id">
+                                    @foreach ($brands as $brand)
+                                        <option @php if($product->brand->id == $brand->id){echo 'selected';} @endphp
+                                            value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <input name="name" type="text" class="form-control" id="name"> --}}
+                            </div>
+                            <div class="mb-3">
                                 <label for="sku" class="form-label">SKU</label>
                                 <input value={{ $product->sku }} name="sku" type="text" class="form-control"
                                     id="sku">

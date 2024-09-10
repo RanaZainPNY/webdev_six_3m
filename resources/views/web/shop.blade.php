@@ -132,11 +132,15 @@
                             <p class="widget-title2 mb-30">Brands</p>
                             <div class="widget-desc">
                                 <ul>
-                                    <li><a href="#">Asos</a></li>
-                                    <li><a href="#">Mango</a></li>
+                                    @if ($brands)
+                                        @foreach ($brands as $brand)
+                                            <li><a href="{{ route('web-shop', $brand->id) }}">{{ $brand->name }}</a></li>
+                                        @endforeach
+                                    @endif
+                                    {{-- <li><a href="#">Mango</a></li>
                                     <li><a href="#">River Island</a></li>
                                     <li><a href="#">Topshop</a></li>
-                                    <li><a href="#">Zara</a></li>
+                                    <li><a href="#">Zara</a></li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -202,9 +206,11 @@
                                                 {{-- <h6>Knot Front Mini Dress</h6> --}}
                                                 <h6>{{ $product->name }}</h6>
                                             </a>
-                                            <p class="product-price">
-                                                {{-- <span class="old-price">$75.00</span> --}}
-                                                Price: {{ $product->price }}</p>
+                                            <div class='d-flex justify-content-between'>
+                                                <p class="product-price">Price: {{ $product->price }}</p>
+                                                <p> <span style='text-decoration: none' class='text-danger'> Brand:</span>
+                                                    {{ $product->brand->name }}</p>
+                                            </div>
 
                                             <!-- Hover Content -->
                                             <div class="hover-content">

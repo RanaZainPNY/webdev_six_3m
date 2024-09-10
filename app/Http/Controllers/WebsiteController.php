@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Brand;
+use Illuminate\Support\Facades\DB;
 
 class WebsiteController extends Controller
 {
@@ -42,13 +44,73 @@ class WebsiteController extends Controller
         ]);
     }
 
-    function shopPage()
+    function shopPage($brand_id = null)
     {
+        // Eloquent ORM
+        // $brands = Brand::all();
+
+        // Via Query Builder
+        // $brands = DB::table('brands')->get();
+
+
+        // Raw Statements
+        // $brands = DB::statement('SELECT * from brands');
+        $brands = DB::select('SELECT * FROM brands' );
+
+
+        // $brands = DB::table('brands')
+        //     ->where('id', '<', 4)
+        //     ->get();
+
+
+
+        //  Eloquent ORM
         $products = Product::all();
+
+        // filtering pipeline
+        // by brand
+
+        if ($brand_id != null) {
+            $brand = Brand::findOrFail($brand_id);
+
+            // Eloquent ORM
+            $products = $brand->products;
+
+            // Queruy Builder
+            // $products = DB::table('brands')
+            //     ->join('products', 'brands.id', '=', 'products.brand_id')
+            //     ->select('products.*')
+            //     ->where('brands.id', '=', $brand_id)
+            //     ->get();
+
+
+
+
+            dd($products);
+
+
+            // $filtered = [];
+            // foreach ($products as $product) {
+            //     if ($product->price > 100 && $product->price < 1000) {
+            //         array_push($filtered, $product);
+            //     }
+            // }
+            // $products = $filtered;
+        }
+
+
+
         return view('web.shop', [
-            'products' => $products
+            'products' => $products,
+            'brands' => $brands,
         ]);
+
+
+
+
     }
+
+
 
     function singleProduct()
     {
@@ -128,7 +190,8 @@ class WebsiteController extends Controller
         return redirect()->back();
     }
 
-    function blog(){
+    function blog()
+    {
         return view('web.blog');
     }
 }
