@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     use HasFactory;
-
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);

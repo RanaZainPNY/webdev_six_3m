@@ -34,7 +34,6 @@ class ProductController extends Controller
             $image->move(public_path('uploads/products/'), $imageName);
             $product->image = $imageName;
             $product->save();
-
         }
 
         return redirect()->route('admin-index');
@@ -56,7 +55,8 @@ class ProductController extends Controller
         // dump($request->name);
         // dump($request->price);
         // dump($request->sku);
-        // dd($request->image);
+        dd($request->image);
+
 
         $product = new Product();
         $product->name = $request->name;
@@ -70,18 +70,18 @@ class ProductController extends Controller
 
 
 
-        if ($request->image != "") {
-            $image = $request->image;
-            $ext = $image->getClientOriginalExtension();
-            $imageName = time() . "." . $ext; // Unique image name;
+        // if ($request->image != "") {
+        //     $image = $request->image;
+        //     $ext = $image->getClientOriginalExtension();
+        //     $imageName = time() . "." . $ext; // Unique image name;
 
-            // save image to products directory
-            $image->move(public_path('/uploads/products'), $imageName);
+        //     // save image to products directory
+        //     $image->move(public_path('/uploads/products'), $imageName);
 
-            // save image in the database
-            $product->image = $imageName;
-            $product->save();
-        }
+        //     // save image in the database
+        //     $product->image = $imageName;
+        //     $product->save();
+        // }
 
 
 
@@ -155,7 +155,6 @@ class ProductController extends Controller
                 "quantity" => 1
             ];
         }
-
         session()->put('cart', $cart);
         return redirect()->back();
     }

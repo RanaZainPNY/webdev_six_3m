@@ -62,8 +62,6 @@ class WebsiteController extends Controller
         //     ->where('id', '<', 4)
         //     ->get();
 
-
-
         //  Eloquent ORM
         $products = Product::all();
 
@@ -82,9 +80,6 @@ class WebsiteController extends Controller
             //     ->select('products.*')
             //     ->where('brands.id', '=', $brand_id)
             //     ->get();
-
-
-
 
             dd($products);
 

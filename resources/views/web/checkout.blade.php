@@ -33,12 +33,12 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="first_name">First Name <span>*</span></label>
-                                    <input name='firstname' type="text" class="form-control" id="first_name"
+                                    <input name="firstname" type="text" class="form-control" id="first_name"
                                         value="" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="last_name">Last Name <span>*</span></label>
-                                    <input name='lastname' type="text" class="form-control" id="last_name" value=""
+                                    <input name="lastname" type="text" class="form-control" id="last_name" value=""
                                         required>
                                 </div>
                                 {{-- <div class="col-12 mb-3">

@@ -59,7 +59,6 @@ Route::post('/web/placeorder', [WebsiteController::class, 'placeorder'])->name('
 
 // Admin Routes
 
-
 Route::get('/admin/index', [WebsiteController::class, 'adminIndexPage'])->name('admin-index');
 Route::get('/admin/master', [WebsiteController::class, 'adminMasterPage'])->name('admin-master');
 Route::get('admin/orders', [WebsiteController::class, 'orders'])->name('admin-orders');
